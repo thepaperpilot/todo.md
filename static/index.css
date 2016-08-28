@@ -1,0 +1,46 @@
+.text {
+	/* Firefox */
+	height: -moz-calc(100% - 44px);
+	width: -moz-calc(50% - 44px);
+	/* WebKit */
+	height: -webkit-calc(100% - 44px);
+	width: -webkit-calc(50% - 44px);
+	/* Opera */
+	height: -o-calc(100% - 44px);
+	width: -o-calc(50% - 44px);
+	/* Standard */
+	height: calc(100% - 44px);
+	width: calc(50% - 44px);
+
+	margin: 4px;
+	padding: 16px;
+	display: inline-block;
+	overflow-y: auto;
+	word-wrap: break-word;
+	outline: solid 2px rgba(0,0,0,0.04);
+}
+
+.button {
+	border: none;
+	outline: none;
+	padding: 8px;
+	background: none;
+}
+
+.button:hover {
+	cursor: pointer;
+}
+
+html,
+body {
+    font-family: "Courier New";
+
+	/* Firefox */
+	height: -moz-calc(100% - 8px);
+	/* WebKit */
+	height: -webkit-calc(100% - 8px);
+	/* Opera */
+	height: -o-calc(100% - 8px);
+	/* Standard */
+	height: calc(100% - 8px);
+}

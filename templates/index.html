@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>todo.md</title>
+	<link rel="stylesheet" href="{{ static_url("github-markdown.css") }}">
+	<link rel="stylesheet" href="{{ static_url("index.css") }}">
+	<script
+		src="https://code.jquery.com/jquery-3.1.0.min.js"
+		integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+		crossorigin="anonymous"
+		type="text/javascript"></script>
+	<script
+		src="https://cdn.rawgit.com/showdownjs/showdown/1.4.3/dist/showdown.min.js"
+		type="text/javascript"></script>
+	<script src="static/todo.js" type="text/javascript"></script>
+</head>
+<body>
+	<span id="md" class="text" contenteditable="true"></span>
+	<span class="text markdown-body">
+		<div style="display: flex;">
+			<input type="search" style="flex: 1;" id="search" placeholder="Search..." />
+			<button type="button" class="button" id="submit">Search</button>
+			<button type="button" class="button" id="help">Help</button>
+		</div>
+		<div id="info">
+			<h1>Help</h1>
+
+			<h2>General</h2>
+
+			<p>Write your TODO list in the box on the left, or paste it in from somewhere else. It will be automatically saved and synced to a hidden folder on Google Drive so this file can follow you device to device. As you type, the markdown rendering of it will appear in the box on the right.</p>
+
+			<h2>Searching</h2>
+
+			<p>Searching will look through every line in your markdown file and filter out any line that doesn't match your search terms. It should be pointed out that since it's searching the raw markdown something like</p>
+
+			<pre><code>[this is a link](https://www.example.com/school)
+			</code></pre>
+
+			<p>will not be filtered out by the search term <code>school</code>.</p>
+
+			<p>The search bar has support for:</p>
+
+			<ul>
+			<li><p>Quotes</p>
+
+			<p>As in, searching <code>hello world</code> will only match lines that have the literal sequence <code>hello world</code> in them, whereas normally the <code>hello</code> and <code>world</code> could be at different locations in the line.</p></li>
+
+			<li><p>ORs</p>
+
+			<p>As in, searching <code>school OR homework</code> will match and line that has either <code>school</code> or <code>homework</code> in it, whereas normally it would need both. You can have multiple ORs, and can use quotes, and it will all behave as expected. (e.g. <code>school OR homework OR "for college" OR university</code>)</p></li>
+
+			<li><p>Dates</p>
+
+			<p>As you'd expect, searching <code>DUE:2016-08-30</code> would filter out any line without that phrase. But, you can use <code>&gt;</code> and <code>&lt;</code> and <code>=</code> like so: <code>DUE:&lt;2016-08-30</code> or <code>DUE:&gt;=2016-08-30</code> to match any date with the <code>DUE</code> tag that is earlier or later (or equal to) the search date.</p></li>
+			</ul>
+
+			<p>More search features will hopefully be coming soon! (feature requests go a long way towards prioritising things like this)</p>
+			<hr />
+		</div>
+		<span id="html"></span>
+	</span>
+</body>
+</html>
