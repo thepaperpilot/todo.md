@@ -135,7 +135,7 @@ var parseElement = function (text, search) {
     var filter = function(item) {
         return lines.indexOf(item) >= 0;
     };
-    while ((found = /(?:(?:"[^"]+"|[^\s"]+)\s+OR\s+)+(?:"[^"]+"|[^\s"]+)/g.exec(search)) !== null) {
+    while ((found = /(?:(?:-?"[^"]+"|[^\s"]+)\s+OR\s+)+(?:-?"[^"]+"|[^\s"]+)/g.exec(search)) !== null) {
         search = search.replace(found[0], '');
         recursivelines = [];
         found[0].split(/(?:\s+OR\s+)(?=(?:[^"]|"[^"]*")*$)/g).forEach(recursion);
