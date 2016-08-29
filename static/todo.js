@@ -103,7 +103,10 @@ var updater = {
             lines.sort(function (a, b) {  return a - b;  });
             text = '';
             lines.forEach(function(item, index) {
-                text = text.concat(textLines[item] + '\n\n');
+                text = text.concat(textLines[item] + '\n');
+                if (textLines[item].match(/^[\s-]*>/) === null) {
+                    text = text.concat('\n');
+                }
             });
         }
 
@@ -140,13 +143,13 @@ var parseElement = function (text, search) {
     }
 
     // Parse quotes
-    while ((found = /(?:")([^"]+)(?:")/g.exec(search)) !== null) {
+    while ((found = /-?(?:")([^"]+)(?:")/g.exec(search)) !== null) {
         search = search.replace(found[0], '');
-        parse(text, lines, found);
+        parse(text, lines, found, found[0].charAt(0) === '-');
     }
 
     // Parse due dates
-    while ((found = /([^ ]+):(<=?|>=?)?([0-9]{4}-[01][0-9]-[0-3][0-9])/g.exec(search)) !== null) {
+    while ((found = /-?([^ ]+):(<=?|>=?)?([0-9]{4}-[01][0-9]-[0-3][0-9])/g.exec(search)) !== null) {
         search = search.replace(found[0], '');
         var searchDate = new Date(found[3]);
         var j = 0;
@@ -180,6 +183,9 @@ var parseElement = function (text, search) {
                     break;
                 }
             }
+            if (found[0].charAt(0) === '-') {
+                matched = !matched;
+            }
             if (matched) {
                 j++;
             } else {
@@ -189,19 +195,19 @@ var parseElement = function (text, search) {
     }
 
     // Parse individual words
-    while ((found = /(\S+)/g.exec(search)) !== null) {
+    while ((found = /-?(\S+)/g.exec(search)) !== null) {
         search = search.replace(found[0], '');
-        parse(text, lines, found);
+        parse(text, lines, found, found[0].charAt(0) === '-');
     }
 
     return lines;
 };
 
-var parse = function(text, lines, found) {
+var parse = function(text, lines, found, exclude) {
     i = 0;
     // This is O(n). Is there a way to reduce that???
     while (i<lines.length) {
-        if (text[lines[i]].indexOf(found[1]) === -1) {
+        if (text[lines[i]].indexOf(found[1]) === -1 ? !exclude : exclude) {
             lines.splice(i, 1);
         } else {
             i++;
@@ -277,7 +283,7 @@ var addContext = function(text, lines) {
             }
 
             // print the bullet list
-            while (j < text.length) {
+            while (j < text.length - 1) {
                 if (lines.indexOf(j) === -1 || !text[j].match(/\S+/)) {
                     lines.splice(0, 0, j);
                     i++;

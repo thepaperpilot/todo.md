@@ -28,4 +28,8 @@ The search bar has support for:
 
     As you'd expect, searching `DUE:2016-08-30` would filter out any line without that phrase. But, you can use `>` and `<` and `=` like so: `DUE:<2016-08-30` or `DUE:>=2016-08-30` to match any date with the `DUE` tag that is earlier or later (or equal to) the search date.
 
-More search features will hopefully be coming soon! (feature requests go a long way towards prioritising things like this)
+- Exclusions
+
+    Prefacing a term with a `-` will have the opposite effect of that term- that is, instead of looking for things with that term it looks for things without it. This also works for quotes, dates, etc.
+
+More search features will hopefully be coming soon! (feature requests go a long way towards prioritizing things like this)
